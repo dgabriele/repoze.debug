@@ -14,3 +14,5 @@ repoze/debug/coverage.xml
 docs/_build/
 
 coverage.xml
+*.swp
+*.swo

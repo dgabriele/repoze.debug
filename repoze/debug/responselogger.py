@@ -99,7 +99,8 @@ class ResponseLoggingMiddleware(object):
                 readargs.append(int(environ['CONTENT_LENGTH']))
             info['body'] = environ['wsgi.input'].read(*readargs)
             try:
-                environ['wsgi.input'].seek(0)
+                if hasattr(environ['wsgi.input'], 'seek'):
+                    environ['wsgi.input'].seek(0)
             except AttributeError:
                 environ['wsgi.input'] = io.BytesIO(info['body'])
         for k, v in sorted(request_data[('extra', 'CGI Variables')].items()):
